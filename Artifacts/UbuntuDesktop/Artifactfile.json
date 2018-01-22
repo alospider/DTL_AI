@@ -5,6 +5,7 @@
     "description": "Install Desktop and RDP on Ubuntu",
     "tags": [
         "Desktop",
+        "RDP",
         "Linux"
     ],
     "iconUri": "https://raw.githubusercontent.com/balteravishay/DTL_AI/master/Artifacts/UbuntuDesktop/logo.png",

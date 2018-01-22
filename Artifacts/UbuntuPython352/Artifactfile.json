@@ -4,7 +4,7 @@
     "publisher": "EDG",
     "description": "Install Python 3.5.2 on Ubuntu",
     "tags": [
-        "NPM",
+        "Python",
         "Linux"
     ],
     "iconUri": "https://raw.githubusercontent.com/balteravishay/DTL_AI/master/Artifacts/UbuntuPython352/logo.png",

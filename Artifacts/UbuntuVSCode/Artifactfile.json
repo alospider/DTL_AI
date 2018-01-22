@@ -4,7 +4,7 @@
     "publisher": "EDG",
     "description": "Install VSCode on Ubuntu",
     "tags": [
-        "PyCharm",
+        "VSCode",
         "Linux"
     ],
     "iconUri": "https://raw.githubusercontent.com/balteravishay/DTL_AI/master/Artifacts/UbuntuVSCode/logo.png",

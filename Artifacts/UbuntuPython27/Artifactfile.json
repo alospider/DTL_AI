@@ -4,7 +4,7 @@
     "publisher": "EDG",
     "description": "Install Python 2.7 on Ubuntu",
     "tags": [
-        "NPM",
+        "Python",
         "Linux"
     ],
     "iconUri": "https://raw.githubusercontent.com/balteravishay/DTL_AI/master/Artifacts/UbuntuPython27/logo.png",
