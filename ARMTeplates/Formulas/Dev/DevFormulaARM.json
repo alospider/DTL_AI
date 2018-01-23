@@ -1,0 +1,147 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "existingLabName": {
+        "type": "string"
+      },
+      "formulaName":{
+        "type": "string"    
+      },
+      "vmOffer":{
+        "type": "string"
+      },
+      "vmPublisher":{
+        "type": "string"
+      },
+      "vmSku":{
+        "type": "string"
+      },
+      "vmSize":{
+        "type": "string"
+      }
+    },
+    "variables": {
+      "labVirtualNetworkName": "[concat('Dtl', parameters('existingLabName'))]",
+      "labSubnetName": "[concat(variables('labVirtualNetworkName'), 'Subnet')]",
+      "labVirtualNetworkId": "[concat('/virtualnetworks/', variables('labVirtualNetworkName'))]",
+  
+      "ostype": "windows", 
+  
+      "repositoryName": "public repo",
+      "artifactsFolder": "artifacts",
+      "vsCodeArtifactName": "[concat(variables('ostype'), '-vscode')]",
+      "enableAdminsArtifactName": "[concat(variables('ostype'), '-enable-local-admins')]"
+    },
+    "resources": [
+      {
+          "type": "microsoft.devtestlab/labs/formulas",
+          "name": "[concat(parameters('existingLabName'), '/', parameters('formulaName'))]",
+          "location": "[resourceGroup().location]",
+          "apiversion": "2017-04-26-preview",
+          "properties": {
+            "description": "Formula for Windows VM.",
+            "ostype": "[variables('ostype')]",
+            "formulacontent": {
+              "properties": {
+                "size": "[parameters('vmSize')]",
+                "username": "",
+                "password": "",
+                "labsubnetname": "[variables('labSubnetName')]",
+                "labvirtualnetworkid": "[variables('labVirtualNetworkId')]",
+                "artifacts": [
+                    {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
+                        "parameters": [
+                          {
+                            "name": "packages",
+                            "value": "[parameters('Apt-Get_packages')]"
+                          },
+                          {
+                            "name": "update",
+                            "value": "[parameters('Apt-Get_update')]"
+                          },
+                          {
+                            "name": "options",
+                            "value": "[parameters('Apt-Get_options')]"
+                          }
+                        ]
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuDesktop')]"
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuChrome')]"
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
+                        "parameters": [
+                          {
+                            "name": "packages",
+                            "value": "[parameters('Apt-Get1_packages')]"
+                          },
+                          {
+                            "name": "update",
+                            "value": "[parameters('Apt-Get1_update')]"
+                          },
+                          {
+                            "name": "options",
+                            "value": "[parameters('Apt-Get1_options')]"
+                          }
+                        ]
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
+                        "parameters": [
+                          {
+                            "name": "packages",
+                            "value": "[parameters('Apt-Get11_packages')]"
+                          },
+                          {
+                            "name": "update",
+                            "value": "[parameters('Apt-Get11_update')]"
+                          },
+                          {
+                            "name": "options",
+                            "value": "[parameters('Apt-Get11_options')]"
+                          }
+                        ]
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuPython27')]"
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuPython352')]"
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuUmake')]"
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuPyCharm')]"
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuWebStorm')]"
+                      },
+                      {
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuVSCode')]"
+                      }
+                ],
+                "galleryimagereference": {
+                  "offer": "[parameters('vmOffer')]",
+                  "publisher": "[parameters('vmPublisher')]",
+                  "sku": "[parameters('vmSku')]",
+                  "ostype": "[variables('ostype')]",
+                  "version": "latest"
+                }
+              }
+            }
+          }
+        }
+      ],   
+    "outputs": {
+      "formulaId": {
+        "type": "string",
+        "value": "[resourceId('Microsoft.DevTestLab/labs/formulas', parameters('existingLabName'), parameters('formulaName'))]"
+      }
+    }
+  }
