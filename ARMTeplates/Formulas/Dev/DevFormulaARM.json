@@ -9,29 +9,77 @@
         "type": "string"    
       },
       "vmOffer":{
-        "type": "string"
+        "type": "string",
+        "defaultValue": "UbuntuServer"
       },
       "vmPublisher":{
-        "type": "string"
+        "type": "string",
+        "defaultValue": "Canonical"
       },
       "vmSku":{
-        "type": "string"
+        "type": "string",
+        "defaultValue": "16.04-LTS"
       },
       "vmSize":{
-        "type": "string"
+        "type": "string",
+        "defaultValue": "Standard_D2"
+      },
+      "ubunturepositoryName":{
+        "type": "string",
+        "defaultValue": "DTL_AI"
+      },
+      "userName": {
+        "type": "string",
+        "defaultValue": "avishay"
+      },
+      "password": {
+        "type": "securestring",
+        "defaultValue": "[[[avishay-password]]"
+      },
+      "Apt-Get_packages": {
+        "type": "string",
+        "defaultValue": "xfce4 xrdp"
+      },
+      "Apt-Get_update": {
+        "type": "string",
+        "defaultValue": "true"
+      },
+      "Apt-Get_options": {
+        "type": "string",
+        "defaultValue": ""
+      },
+      "Apt-Get1_packages": {
+        "type": "string",
+        "defaultValue": "google-chrome-stable"
+      },
+      "Apt-Get1_update": {
+        "type": "string",
+        "defaultValue": "true"
+      },
+      "Apt-Get1_options": {
+        "type": "string",
+        "defaultValue": ""
+      },
+      "Apt-Get11_packages": {
+        "type": "string",
+        "defaultValue": "build-essential checkinstall libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev"
+      },
+      "Apt-Get11_update": {
+        "type": "string",
+        "defaultValue": "true"
+      },
+      "Apt-Get11_options": {
+        "type": "string",
+        "defaultValue": ""
       }
     },
     "variables": {
       "labVirtualNetworkName": "[concat('Dtl', parameters('existingLabName'))]",
       "labSubnetName": "[concat(variables('labVirtualNetworkName'), 'Subnet')]",
       "labVirtualNetworkId": "[concat('/virtualnetworks/', variables('labVirtualNetworkName'))]",
-  
-      "ostype": "windows", 
-  
-      "repositoryName": "public repo",
-      "artifactsFolder": "artifacts",
-      "vsCodeArtifactName": "[concat(variables('ostype'), '-vscode')]",
-      "enableAdminsArtifactName": "[concat(variables('ostype'), '-enable-local-admins')]"
+      "ostype": "linux", 
+      "publicrepositoryName": "public repo",
+      "artifactsFolder": "artifacts"
     },
     "resources": [
       {
@@ -68,10 +116,10 @@
                         ]
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuDesktop')]"
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuDesktop')]"
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuChrome')]"
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuChrome')]"
                       },
                       {
                         "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
@@ -108,22 +156,22 @@
                         ]
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuPython27')]"
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuPython27')]"
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuPython352')]"
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuPython352')]"
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuUmake')]"
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuUmake')]"
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuPyCharm')]"
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuPyCharm')]"
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuWebStorm')]"
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuWebStorm')]"
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuVSCode')]"
+                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuVSCode')]"
                       }
                 ],
                 "galleryimagereference": {
