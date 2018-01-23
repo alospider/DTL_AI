@@ -1,0 +1,189 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "newVMName": {
+        "type": "string",
+        "defaultValue": "dev-machine"
+      },
+      "labName": {
+        "type": "string",
+        "defaultValue": "IAIlab"
+      },
+      "size": {
+        "type": "string",
+        "defaultValue": "Standard_D2"
+      },
+      "userName": {
+        "type": "string",
+        "defaultValue": "avishay"
+      },
+      "password": {
+        "type": "securestring",
+        "defaultValue": "[[[avishay-password]]"
+      },
+      "Apt-Get_packages": {
+        "type": "string",
+        "defaultValue": "xfce4 xrdp"
+      },
+      "Apt-Get_update": {
+        "type": "string",
+        "defaultValue": "true"
+      },
+      "Apt-Get_options": {
+        "type": "string",
+        "defaultValue": ""
+      },
+      "Apt-Get1_packages": {
+        "type": "string",
+        "defaultValue": "google-chrome-stable"
+      },
+      "Apt-Get1_update": {
+        "type": "string",
+        "defaultValue": "true"
+      },
+      "Apt-Get1_options": {
+        "type": "string",
+        "defaultValue": ""
+      },
+      "Apt-Get11_packages": {
+        "type": "string",
+        "defaultValue": "build-essential checkinstall libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev"
+      },
+      "Apt-Get11_update": {
+        "type": "string",
+        "defaultValue": "true"
+      },
+      "Apt-Get11_options": {
+        "type": "string",
+        "defaultValue": ""
+      }
+    },
+    "variables": {
+      "labSubnetName": "[concat(variables('labVirtualNetworkName'), 'Subnet')]",
+      "labVirtualNetworkId": "[resourceId('Microsoft.DevTestLab/labs/virtualnetworks', parameters('labName'), variables('labVirtualNetworkName'))]",
+      "labVirtualNetworkName": "[concat('Dtl', parameters('labName'))]",
+      "vmId": "[resourceId ('Microsoft.DevTestLab/labs/virtualmachines', parameters('labName'), parameters('newVMName'))]",
+      "vmName": "[concat(parameters('labName'), '/', parameters('newVMName'))]"
+    },
+    "resources": [
+      {
+        "apiVersion": "2017-04-26-preview",
+        "type": "Microsoft.DevTestLab/labs/virtualmachines",
+        "name": "[variables('vmName')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "labVirtualNetworkId": "[variables('labVirtualNetworkId')]",
+          "notes": "Ubuntu Server 16.04 LTS",
+          "galleryImageReference": {
+            "offer": "UbuntuServer",
+            "publisher": "Canonical",
+            "sku": "16.04-LTS",
+            "osType": "Linux",
+            "version": "latest"
+          },
+          "size": "[parameters('size')]",
+          "userName": "[parameters('userName')]",
+          "password": "[parameters('password')]",
+          "isAuthenticationWithSshKey": false,
+          "artifacts": [
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
+              "parameters": [
+                {
+                  "name": "packages",
+                  "value": "[parameters('Apt-Get_packages')]"
+                },
+                {
+                  "name": "update",
+                  "value": "[parameters('Apt-Get_update')]"
+                },
+                {
+                  "name": "options",
+                  "value": "[parameters('Apt-Get_options')]"
+                }
+              ]
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuDesktop')]"
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuChrome')]"
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
+              "parameters": [
+                {
+                  "name": "packages",
+                  "value": "[parameters('Apt-Get1_packages')]"
+                },
+                {
+                  "name": "update",
+                  "value": "[parameters('Apt-Get1_update')]"
+                },
+                {
+                  "name": "options",
+                  "value": "[parameters('Apt-Get1_options')]"
+                }
+              ]
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
+              "parameters": [
+                {
+                  "name": "packages",
+                  "value": "[parameters('Apt-Get11_packages')]"
+                },
+                {
+                  "name": "update",
+                  "value": "[parameters('Apt-Get11_update')]"
+                },
+                {
+                  "name": "options",
+                  "value": "[parameters('Apt-Get11_options')]"
+                }
+              ]
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuPython27')]"
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuPython352')]"
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuUmake')]"
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuPyCharm')]"
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuWebStorm')]"
+            },
+            {
+              "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'privaterepo385', 'UbuntuVSCode')]"
+            }
+          ],
+          "labSubnetName": "[variables('labSubnetName')]",
+          "disallowPublicIpAddress": true,
+          "storageType": "Standard",
+          "allowClaim": false,
+          "networkInterface": {
+            "sharedPublicIpAddressConfiguration": {
+              "inboundNatRules": [
+                {
+                  "transportProtocol": "tcp",
+                  "backendPort": 22
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "outputs": {
+      "labVMId": {
+        "type": "string",
+        "value": "[variables('vmId')]"
+      }
+    }
+  }
