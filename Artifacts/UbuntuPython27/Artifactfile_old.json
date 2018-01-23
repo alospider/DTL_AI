@@ -10,6 +10,6 @@
     "iconUri": "https://raw.githubusercontent.com/balteravishay/DTL_AI/master/Artifacts/UbuntuPython27/logo.png",
     "targetOsType": "Linux",
     "runCommand": {
-        "commandToExecute": "['sh ubuntu_install_python27_v2.sh']"
+        "commandToExecute": "['sh ubuntu_install_python27_v1.sh']"
     }
 }
