@@ -29,9 +29,6 @@
       "userName": {
         "type": "string"
       },
-      "password": {
-        "type": "securestring"
-      },
       "Apt-Get_packages": {
         "type": "string",
         "defaultValue": "xfce4 xrdp"
@@ -70,7 +67,7 @@
       },
       "Apt-Get111_packages": {
         "type": "string",
-        "defaultValue": "ubuntu-make"
+        "defaultValue": "pycharm"
       },
       "Apt-Get111_update": {
         "type": "string",
@@ -103,7 +100,6 @@
                 "size": "[parameters('vmSize')]",
                 "storageType": "[parameters('storageType')]",
                 "username": "[parameters('userName')]",
-                "password": "[parameters('password')]",
                 "labsubnetname": "[variables('labSubnetName')]",
                 "labvirtualnetworkid": "[variables('labVirtualNetworkId')]",
                 "artifacts": [
@@ -171,7 +167,13 @@
                     "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuPython352')]"
                   },
                   {
-                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuUmake')]"
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuVSCode')]"
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuWebStorm')]"
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuPyCharm')]"
                   },
                   {
                     "artifactId": "[concat('/artifactsources/', variables('publicrepositoryName'), '/', variables('artifactsFolder'), '/', 'linux-apt-package')]",
@@ -189,15 +191,6 @@
                         "value": "[parameters('Apt-Get111_options')]"
                       }
                     ]
-                  },
-                  {
-                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuVSCode')]"
-                  },
-                  {
-                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuWebStorm')]"
-                  },
-                  {
-                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuPyCharm')]"
                   }
                 ],
                 "galleryimagereference": {
