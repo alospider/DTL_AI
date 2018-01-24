@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo snap install webstorm --classic
+sudo snap install vscode --classic
