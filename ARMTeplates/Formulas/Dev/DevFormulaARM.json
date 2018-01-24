@@ -99,6 +99,7 @@
               "properties": {
                 "size": "[parameters('vmSize')]",
                 "storageType": "[parameters('storageType')]",
+                "disallowPublicIpAddress": false,
                 "username": "[parameters('userName')]",
                 "labsubnetname": "[variables('labSubnetName')]",
                 "labvirtualnetworkid": "[variables('labVirtualNetworkId')]",
