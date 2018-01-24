@@ -3,10 +3,12 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "existingLabName": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "IAIlab"
       },
       "formulaName":{
-        "type": "string"    
+        "type": "string",
+        "defaultValue": "DevForumla01"
       },
       "vmOffer":{
         "type": "string",
@@ -71,6 +73,18 @@
       "Apt-Get11_options": {
         "type": "string",
         "defaultValue": ""
+      },
+      "Apt-Get111_packages": {
+        "type": "string",
+        "defaultValue": "ubuntu-make"
+      },
+      "Apt-Get111_update": {
+        "type": "string",
+        "defaultValue": "true"
+      },
+      "Apt-Get111_options": {
+        "type": "string",
+        "defaultValue": ""
       }
     },
     "variables": {
@@ -93,86 +107,103 @@
             "formulacontent": {
               "properties": {
                 "size": "[parameters('vmSize')]",
-                "username": "",
-                "password": "",
+                "username": "[parameters('userName')]",
+                "password": "[parameters('password')]",
                 "labsubnetname": "[variables('labSubnetName')]",
                 "labvirtualnetworkid": "[variables('labVirtualNetworkId')]",
                 "artifacts": [
-                    {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
-                        "parameters": [
-                          {
-                            "name": "packages",
-                            "value": "[parameters('Apt-Get_packages')]"
-                          },
-                          {
-                            "name": "update",
-                            "value": "[parameters('Apt-Get_update')]"
-                          },
-                          {
-                            "name": "options",
-                            "value": "[parameters('Apt-Get_options')]"
-                          }
-                        ]
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'public repo', 'linux-apt-package')]",
+                    "parameters": [
+                      {
+                        "name": "packages",
+                        "value": "[parameters('Apt-Get_packages')]"
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuDesktop')]"
+                        "name": "update",
+                        "value": "[parameters('Apt-Get_update')]"
                       },
                       {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuChrome')]"
-                      },
-                      {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
-                        "parameters": [
-                          {
-                            "name": "packages",
-                            "value": "[parameters('Apt-Get1_packages')]"
-                          },
-                          {
-                            "name": "update",
-                            "value": "[parameters('Apt-Get1_update')]"
-                          },
-                          {
-                            "name": "options",
-                            "value": "[parameters('Apt-Get1_options')]"
-                          }
-                        ]
-                      },
-                      {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), 'public repo', 'linux-apt-package')]",
-                        "parameters": [
-                          {
-                            "name": "packages",
-                            "value": "[parameters('Apt-Get11_packages')]"
-                          },
-                          {
-                            "name": "update",
-                            "value": "[parameters('Apt-Get11_update')]"
-                          },
-                          {
-                            "name": "options",
-                            "value": "[parameters('Apt-Get11_options')]"
-                          }
-                        ]
-                      },
-                      {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuPython27')]"
-                      },
-                      {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuPython352')]"
-                      },
-                      {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuUmake')]"
-                      },
-                      {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuPyCharm')]"
-                      },
-                      {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuWebStorm')]"
-                      },
-                      {
-                        "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('labName'), concat('/artifactsources/', parameters('ubunturepositoryName')), '/', variables('artifactsFolder'), 'UbuntuVSCode')]"
+                        "name": "options",
+                        "value": "[parameters('Apt-Get_options')]"
                       }
+                    ]
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuDesktop')]"
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuChrome')]"
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'public repo', 'linux-apt-package')]",
+                    "parameters": [
+                      {
+                        "name": "packages",
+                        "value": "[parameters('Apt-Get1_packages')]"
+                      },
+                      {
+                        "name": "update",
+                        "value": "[parameters('Apt-Get1_update')]"
+                      },
+                      {
+                        "name": "options",
+                        "value": "[parameters('Apt-Get1_options')]"
+                      }
+                    ]
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'public repo', 'linux-apt-package')]",
+                    "parameters": [
+                      {
+                        "name": "packages",
+                        "value": "[parameters('Apt-Get11_packages')]"
+                      },
+                      {
+                        "name": "update",
+                        "value": "[parameters('Apt-Get11_update')]"
+                      },
+                      {
+                        "name": "options",
+                        "value": "[parameters('Apt-Get11_options')]"
+                      }
+                    ]
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuPython27')]"
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuPython352')]"
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuUmake')]"
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'public repo', 'linux-apt-package')]",
+                    "parameters": [
+                      {
+                        "name": "packages",
+                        "value": "[parameters('Apt-Get111_packages')]"
+                      },
+                      {
+                        "name": "update",
+                        "value": "[parameters('Apt-Get111_update')]"
+                      },
+                      {
+                        "name": "options",
+                        "value": "[parameters('Apt-Get111_options')]"
+                      }
+                    ]
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuVSCode')]"
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuWebStorm')]"
+                  },
+                  {
+                    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuPyCharm')]"
+                  }
                 ],
                 "galleryimagereference": {
                   "offer": "[parameters('vmOffer')]",
