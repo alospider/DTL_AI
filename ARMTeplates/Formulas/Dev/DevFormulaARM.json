@@ -30,8 +30,7 @@
         "type": "string"
       },
       "Apt-Get_packages": {
-        "type": "string",
-        "defaultValue": "xfce4 xrdp"
+        "type": "string"
       },
       "Apt-Get_update": {
         "type": "string",

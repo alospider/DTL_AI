@@ -1,0 +1,37 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "vmSize":{
+        "value": "Standard_D2_V2"
+      },
+      "storageType":{
+        "value": "Standard"
+      },
+      "formulaName": {
+        "value": "Dev-Linux-xfce"
+      },
+      "vmOffer": {
+        "value": "UbuntuServer"
+      },
+      "vmPublisher":{
+        "value": "Canonical"
+      },
+      "vmSku":{
+        "value": "16.04-LTS"
+      }
+      ,
+      "existingLabName":{
+        "value": "IAIlab"
+      },
+      "userName":{
+        "value": "avishay"
+      },
+      "ubunturepositoryName":{
+        "value": "privaterepo385"
+      },
+      "Apt-Get_packages":{
+        "value": "xfce4 xrdp"
+      }
+    }
+  }

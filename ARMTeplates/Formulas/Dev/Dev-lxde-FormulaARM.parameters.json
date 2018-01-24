@@ -9,7 +9,7 @@
         "value": "Standard"
       },
       "formulaName": {
-        "value": "DevForumla01"
+        "value": "Dev-Linux-lxde"
       },
       "vmOffer": {
         "value": "UbuntuServer"
@@ -29,6 +29,9 @@
       },
       "ubunturepositoryName":{
         "value": "privaterepo385"
+      },
+      "Apt-Get_packages":{
+        "value": "lxde xrdp"
       }
     }
   }
