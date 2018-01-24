@@ -1,3 +1,3 @@
 #!/bin/bash
-
-umake ide pycharm
+printf "\na\na\na\n" > input
+umake ide pycharm < input
