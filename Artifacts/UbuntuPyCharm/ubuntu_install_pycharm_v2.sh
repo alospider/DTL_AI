@@ -1,3 +1,6 @@
 #!/bin/bash
-printf "\na\na\na\n" > input
-umake ide pycharm < input
+sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu $(lsb_release -sc)-getdeb apps" >> /etc/apt/sources.list.d/getdeb.list'
+wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
+
+# sudo apt update
+# sudo apt install pycharm

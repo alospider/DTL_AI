@@ -1,5 +1,5 @@
 {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'public repo', 'linux-apt-package')]",
+    "artifactId": "[concat('/artifactsources/', variables('publicrepositoryName'), '/', variables('artifactsFolder'), '/', 'linux-apt-package')]",
     "parameters": [
       {
         "name": "packages",
@@ -16,13 +16,13 @@
     ]
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuDesktop')]"
+    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuDesktop')]"
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuChrome')]"
+    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuChrome')]"
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'public repo', 'linux-apt-package')]",
+    "artifactId": "[concat('/artifactsources/', variables('publicrepositoryName'), '/', variables('artifactsFolder'), '/', 'linux-apt-package')]",
     "parameters": [
       {
         "name": "packages",
@@ -39,7 +39,7 @@
     ]
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'public repo', 'linux-apt-package')]",
+    "artifactId": "[concat('/artifactsources/', variables('publicrepositoryName'), '/', variables('artifactsFolder'), '/', 'linux-apt-package')]",
     "parameters": [
       {
         "name": "packages",
@@ -56,16 +56,16 @@
     ]
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuPython27')]"
+    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuPython27')]"
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuPython352')]"
+    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuPython352')]"
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuUmake')]"
+    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuUmake')]"
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'public repo', 'linux-apt-package')]",
+    "artifactId": "[concat('/artifactsources/', variables('publicrepositoryName'), '/', variables('artifactsFolder'), '/', 'linux-apt-package')]",
     "parameters": [
       {
         "name": "packages",
@@ -82,11 +82,11 @@
     ]
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuVSCode')]"
+    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuVSCode')]"
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuWebStorm')]"
+    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuWebStorm')]"
   },
   {
-    "artifactId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/artifacts', parameters('existingLabName'), 'privaterepo385', 'UbuntuPyCharm')]"
+    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuPyCharm')]"
   }

@@ -20,6 +20,9 @@
       "vmSize":{
         "type": "string"
       },
+      "storageType":{
+        "type": "string"
+      },
       "ubunturepositoryName":{
         "type": "string"
       },
@@ -97,7 +100,8 @@
             "ostype": "[variables('ostype')]",
             "formulacontent": {
               "properties": {
-                "size": "Standard_D3_V2",
+                "size": "[parameters('vmSize')]",
+                "storageType": "[parameters('storageType')]",
                 "username": "[parameters('userName')]",
                 "password": "[parameters('password')]",
                 "labsubnetname": "[variables('labSubnetName')]",
@@ -108,17 +112,92 @@
                     "parameters": [
                       {
                         "name": "packages",
-                        "value": "xfce4 xrdp"
+                        "value": "[parameters('Apt-Get_packages')]"
                       },
                       {
                         "name": "update",
-                        "value": "true"
+                        "value": "[parameters('Apt-Get_update')]"
                       },
                       {
                         "name": "options",
-                        "value": ""
+                        "value": "[parameters('Apt-Get_options')]"
                       }
                     ]
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuDesktop')]"
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuChrome')]"
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', variables('publicrepositoryName'), '/', variables('artifactsFolder'), '/', 'linux-apt-package')]",
+                    "parameters": [
+                      {
+                        "name": "packages",
+                        "value": "[parameters('Apt-Get1_packages')]"
+                      },
+                      {
+                        "name": "update",
+                        "value": "[parameters('Apt-Get1_update')]"
+                      },
+                      {
+                        "name": "options",
+                        "value": "[parameters('Apt-Get1_options')]"
+                      }
+                    ]
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', variables('publicrepositoryName'), '/', variables('artifactsFolder'), '/', 'linux-apt-package')]",
+                    "parameters": [
+                      {
+                        "name": "packages",
+                        "value": "[parameters('Apt-Get11_packages')]"
+                      },
+                      {
+                        "name": "update",
+                        "value": "[parameters('Apt-Get11_update')]"
+                      },
+                      {
+                        "name": "options",
+                        "value": "[parameters('Apt-Get11_options')]"
+                      }
+                    ]
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuPython27')]"
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuPython352')]"
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuUmake')]"
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', variables('publicrepositoryName'), '/', variables('artifactsFolder'), '/', 'linux-apt-package')]",
+                    "parameters": [
+                      {
+                        "name": "packages",
+                        "value": "[parameters('Apt-Get111_packages')]"
+                      },
+                      {
+                        "name": "update",
+                        "value": "[parameters('Apt-Get111_update')]"
+                      },
+                      {
+                        "name": "options",
+                        "value": "[parameters('Apt-Get111_options')]"
+                      }
+                    ]
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuVSCode')]"
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuWebStorm')]"
+                  },
+                  {
+                    "artifactId": "[concat('/artifactsources/', parameters('ubunturepositoryName'), '/', variables('artifactsFolder'), '/', 'UbuntuPyCharm')]"
                   }
                 ],
                 "galleryimagereference": {

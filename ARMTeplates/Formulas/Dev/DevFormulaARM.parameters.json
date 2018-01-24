@@ -5,6 +5,9 @@
       "vmSize":{
         "value": "Standard_D2_V2"
       },
+      "storageType":{
+        "value": "Standard"
+      },
       "formulaName": {
         "value": "DevForumla01"
       },
@@ -28,7 +31,7 @@
         "value": "[[[avishay-password]]"
       },
       "ubunturepositoryName":{
-        "value": "DTL_AI"
+        "value": "privaterepo385"
       }
     }
   }
